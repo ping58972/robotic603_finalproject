@@ -17,7 +17,6 @@ RUN apt-get install -y \
   python3-rosinstall-generator \
   python3-wstool \
   build-essential \
-  git \
   python3-dev \
   python3-catkin-tools \
   ros-noetic-rosserial-arduino \
@@ -31,24 +30,12 @@ RUN apt-get install -y \
   ros-noetic-image-transport \
   ros-noetic-image-transport-plugins \
   tmux \
-  usbutils \
-  v4l-utils \
   python3-pip \
-  python3-venv \
   python3-numpy \
-  python3-scipy \
   python3-opencv \
-  python3-matplotlib \
-  python3-pandas \
-  python3-sklearn \
-  python3-h5py \
-  python3-yaml \
-  python3-tqdm \
-  python3-pil \
-  ros-noetic-teleop-twist-keyboard \
-  && rm -rf /var/lib/apt/lists/* 
+  ros-noetic-teleop-twist-keyboard
 
-RUN python3 -m pip install --no-cache-dir torch torchvision torchaudio
+RUN python3 -m pip install torch torchvision
 
 RUN rosdep init && rosdep update
 
