@@ -35,7 +35,6 @@ RUN apt-get install -y \
   v4l-utils \
   python3-pip \
   python3-venv \
-  python3-torch \
   python3-numpy \
   python3-scipy \
   python3-opencv \
@@ -48,6 +47,8 @@ RUN apt-get install -y \
   python3-pil \
   ros-noetic-teleop-twist-keyboard \
   && rm -rf /var/lib/apt/lists/* 
+
+RUN python3 -m pip install --no-cache-dir torch torchvision torchaudio
 
 RUN rosdep init && rosdep update
 
