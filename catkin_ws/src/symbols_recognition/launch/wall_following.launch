@@ -1,7 +1,7 @@
 <launch>
     <arg name="world_file" default="worlds/largemaze.world"/>
     <arg name="robot_name" default="triton"/>
-    <arg name="sdf_robot_file" default="$(find stingray_sim)/models/$(arg robot_name)/model.sdf"/>
+    <arg name="sdf_robot_file" default="$(find symbols_recognition)/models/$(arg robot_name)/model.sdf"/>
     <arg name="x" default="0.0" />
     <arg name="y" default="0.0" />
     <arg name="z" default="0.0" />
@@ -29,6 +29,6 @@
     <node pkg="stingray_sim" type="P2D1_wallFollower.py" name="wall_follower" />
 
 
-    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find stingray_sim)/rviz/lidar.rviz" />
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find symbols_recognition)/rviz/lidar.rviz" />
     
 </launch>
