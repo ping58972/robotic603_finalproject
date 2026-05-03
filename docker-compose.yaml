@@ -1,0 +1,23 @@
+version: '3'
+services:
+  triton_noetic:
+    image: triton_noetic
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # If you want to use the keyboard without X11 errors:
+    stdin_open: true # equivalent to -i
+    tty: true        # equivalent to -t      
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - "${PWD}/catkin_ws/src:/catkin_ws/src"
+    network_mode: host
+    privileged: true
+    devices:
+      - /dev:/dev
+    command: /bin/bash -c "tail -f /dev/null"
+    environment:
+      - ROS_MASTER_URI=http://localhost:11311
+      - ROS_IP=192.168.1.58
+      - DISPLAY=${DISPLAY}
+
