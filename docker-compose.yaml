@@ -1,7 +1,7 @@
 version: '3'
 services:
-  triton_noetic:
-    image: triton_noetic
+  triton_noetic_ping:
+    image: triton_noetic_ping:latest
     build:
       context: .
       dockerfile: Dockerfile
