@@ -37,8 +37,6 @@ RUN apt-get install -y \
 
 RUN python3 -m pip install torch torchvision
 
-RUN rosdep init && rosdep update
-
 RUN echo "source /opt/ros/noetic/setup.bash" >> /root/.bashrc
 
 RUN mkdir /catkin_ws
