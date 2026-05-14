@@ -5,12 +5,13 @@ __pycache__/
 .DS_Store
 # C extensions
 *.so
-nn_training/*
+# nn_training/*
 # !nn_training/__init__.py
 # !nn_training/cnn/
 # !nn_training/cnn/**
 # !nn_training/mobilenetv2/
 # !nn_training/mobilenetv2/**
+nn_training/datasets/*
 Distribution / packaging
 .Python
 build/
