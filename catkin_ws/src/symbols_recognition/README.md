@@ -134,18 +134,21 @@ The symbol-recognition launch starts the camera through `usb_cam` by default bec
 roslaunch symbols_recognition real_robot.launch \
   target_symbol:=circle \
   use_usb_cam:=true \
-  usb_video_device:=/dev/video0 \
+  usb_video_device:=/dev/video2 \
+  usb_pixel_format:=mjpeg \
   color_width:=640 \
   color_height:=480 \
   color_fps:=15
 ```
 
-If `/dev/video0` is not the RGB stream, inspect the devices and try `/dev/video1` or `/dev/video2`:
+If the web stream is green, purple, or warped, `usb_cam` is probably reading a depth/IR endpoint or using the wrong pixel format. Inspect the devices and use the video node that exposes the RGB/color stream:
 
 ```bash
 v4l2-ctl --list-devices
 v4l2-ctl --list-formats-ext -d /dev/video0
 ```
+
+On RealSense cameras the color stream is commonly `/dev/video2`, but the exact index can change. Try `usb_pixel_format:=mjpeg` first, then `usb_pixel_format:=yuyv` or `usb_pixel_format:=uyvy` if MJPEG is not listed for the selected device.
 
 If another workflow needs the RealSense ROS driver, disable the fallback explicitly:
 
