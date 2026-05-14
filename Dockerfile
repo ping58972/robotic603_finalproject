@@ -41,8 +41,11 @@ RUN apt-get install -y \
   ros-noetic-teleop-twist-keyboard
 
 RUN python3 -m pip install --no-cache-dir \
+  numpy==1.24.4 \
+  typing-extensions==4.12.2
+
+RUN python3 -m pip install --no-cache-dir \
   --index-url https://download.pytorch.org/whl/cpu \
-  typing-extensions==4.12.2 \
   torch==2.4.1 \
   torchvision==0.19.1
 

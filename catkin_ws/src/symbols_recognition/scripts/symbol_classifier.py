@@ -4,14 +4,15 @@ import math
 import os
 from pathlib import Path
 
+import torch
+from torch import nn
+
 import cv2
 import numpy as np
 import rospy
-import torch
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 from std_msgs.msg import Float32, String
-from torch import nn
 
 
 DEFAULT_CLASS_NAMES = ("circle", "square", "star", "triangle")
