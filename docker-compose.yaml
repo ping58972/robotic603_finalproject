@@ -21,3 +21,4 @@ services:
       - ROS_IP=${ROS_IP:-10.0.0.20}
       - DISPLAY=${DISPLAY:-}
       - QT_X11_NO_MITSHM=1
+      - LD_PRELOAD=${LD_PRELOAD:-/lib/aarch64-linux-gnu/libgomp.so.1}

@@ -19,6 +19,7 @@
   <arg name="model_type" default="auto"/>
   <arg name="checkpoint_path" default="/nn_training/cnn/checkpoints/symbols_cnn_best.pt"/>
   <arg name="device" default="auto"/>
+  <arg name="libgomp_preload" default="/lib/aarch64-linux-gnu/libgomp.so.1"/>
   <arg name="max_rate" default="5.0"/>
   <arg name="min_confidence" default="0.0"/>
   <arg name="publish_annotated" default="true"/>
@@ -45,6 +46,7 @@
   </group>
 
   <node pkg="symbols_recognition" type="symbol_classifier.py" name="symbol_classifier" output="screen" if="$(arg detector)" respawn="$(arg detector_respawn)" respawn_delay="3.0">
+    <env name="LD_PRELOAD" value="$(arg libgomp_preload)"/>
     <param name="image_topic" value="$(arg image_topic)"/>
     <param name="checkpoint_path" value="$(arg checkpoint_path)"/>
     <param name="model_type" value="$(arg model_type)"/>

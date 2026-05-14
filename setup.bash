@@ -2,6 +2,7 @@
 
 source /opt/ros/noetic/setup.bash
 source /catkin_ws/devel/setup.bash
+export LD_PRELOAD="${LD_PRELOAD:-/lib/aarch64-linux-gnu/libgomp.so.1}"
 
 target_symbol=""
 target_seek_enabled="true"
