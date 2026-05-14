@@ -12,7 +12,6 @@ from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 from std_msgs.msg import Float32, String
 from torch import nn
-from torchvision.models import mobilenet_v2
 
 
 DEFAULT_CLASS_NAMES = ("circle", "square", "star", "triangle")
@@ -79,6 +78,8 @@ def infer_model_type(requested_type, checkpoint_path, checkpoint):
 
 
 def build_mobilenet_v2(num_classes, dropout):
+    from torchvision.models import mobilenet_v2
+
     try:
         model = mobilenet_v2(weights=None)
     except TypeError:

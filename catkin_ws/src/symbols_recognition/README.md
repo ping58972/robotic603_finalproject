@@ -116,6 +116,17 @@ roslaunch symbols_recognition real_robot.launch \
 
 If RealSense prints messages such as `set_xu(ctrl=1) failed` or `requested device is NOT found`, the camera driver is not producing images. With `require_classifier_ready:=true`, the robot holds zero velocity until `/symbol_classifier/result` is live again. Check USB connection, camera permissions, and that another process is not already using the RealSense device.
 
+If `rostopic list` shows `/symbol_classifier/result` but `rosnode list` does not show `/symbol_classifier`, the topic is only present because the target controller subscribes to it. The classifier process is not alive. Check:
+
+```bash
+rosnode list | grep symbol_classifier
+ls -lh /nn_training/cnn/checkpoints/symbols_cnn_best.pt
+python3 -c "import torch; print(torch.__version__)"
+rosrun symbols_recognition symbol_classifier.py _checkpoint_path:=/nn_training/cnn/checkpoints/symbols_cnn_best.pt _image_topic:=/camera/color/image_raw
+```
+
+The classifier can be launched without a live image topic; it should stay alive and wait for images. If it exits, the terminal error from `rosrun` is the real cause.
+
 The Triton bringup starts the RealSense in color-only mode by default for symbol detection:
 
 ```bash
