@@ -207,7 +207,9 @@ class SymbolClassifierNode:
         self.checkpoint_path = Path(
             rospy.get_param(
                 "~checkpoint_path",
-                os.environ.get("SYMBOL_MODEL_CHECKPOINT", "/nn_training/cnn/checkpoints/symbols_cnn_best.pt"),
+                # os.environ.get("SYMBOL_MODEL_CHECKPOINT", "/nn_training/cnn/checkpoints/symbols_cnn_best.pt"),
+                os.environ.get("SYMBOL_MODEL_CHECKPOINT", "/nn_training/mobilenetv2/checkpoints/symbols_cnn_best.pt"),
+                
             )
         ).expanduser()
         self.model_type = rospy.get_param("~model_type", "auto")
