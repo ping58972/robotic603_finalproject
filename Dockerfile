@@ -17,6 +17,9 @@ RUN apt-get install -y \
   python3-rosinstall-generator \
   python3-wstool \
   build-essential \
+  usbutils \
+  v4l-utils \
+  librealsense2-utils \
   python3-dev \
   python3-catkin-tools \
   ros-noetic-rosserial-arduino \
