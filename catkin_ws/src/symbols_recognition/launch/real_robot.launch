@@ -4,7 +4,7 @@
   <arg name="camera" default="true"/>
   <arg name="lidar" default="true"/>
   <arg name="use_usb_cam" default="true"/>
-  <arg name="usb_video_device" default="/dev/video2"/>
+  <arg name="usb_video_device" default="/dev/video0"/>
   <arg name="usb_pixel_format" default="yuyv"/>
   <arg name="aligned_depth" default="false"/>
   <arg name="color_width" default="640"/>

@@ -133,17 +133,17 @@ The symbol-recognition launch starts the camera through `usb_cam` by default bec
 roslaunch symbols_recognition real_robot.launch \
   target_symbol:=circle \
   use_usb_cam:=true \
-  usb_video_device:=/dev/video2 \
+  usb_video_device:=/dev/video0 \
   color_width:=640 \
   color_height:=480 \
   color_fps:=15
 ```
 
-If `/dev/video2` is not the RGB stream, inspect the devices and try `/dev/video0` or `/dev/video1`:
+If `/dev/video0` is not the RGB stream, inspect the devices and try `/dev/video1` or `/dev/video2`:
 
 ```bash
 v4l2-ctl --list-devices
-v4l2-ctl --list-formats-ext -d /dev/video2
+v4l2-ctl --list-formats-ext -d /dev/video0
 ```
 
 If another workflow needs the RealSense ROS driver, disable the fallback explicitly:

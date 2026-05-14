@@ -28,6 +28,10 @@
   <group if="$(arg camera)">
     <group if="$(arg use_usb_cam)">
       <node pkg="usb_cam" type="usb_cam_node" name="usb_cam" ns="/camera/color" output="screen">
+        <remap from="image_raw" to="/camera/color/image_raw"/>
+        <remap from="camera_info" to="/camera/color/camera_info"/>
+        <remap from="/camera/color/usb_cam/image_raw" to="/camera/color/image_raw"/>
+        <remap from="/camera/color/usb_cam/camera_info" to="/camera/color/camera_info"/>
         <param name="video_device" value="$(arg usb_video_device)"/>
         <param name="image_width" value="$(arg color_width)"/>
         <param name="image_height" value="$(arg color_height)"/>
