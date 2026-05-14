@@ -1,0 +1,42 @@
+<launch>
+  <arg name="bringup" default="true"/>
+  <arg name="drive" default="true"/>
+  <arg name="camera" default="true"/>
+  <arg name="lidar" default="true"/>
+  <arg name="detector" default="true"/>
+  <arg name="wall_follow" default="false"/>
+
+  <arg name="image_topic" default="/camera/color/image_raw"/>
+  <arg name="scan_topic" default="/scan"/>
+  <arg name="cmd_vel_topic" default="/cmd_vel"/>
+  <arg name="model_type" default="auto"/>
+  <arg name="checkpoint_path" default="/nn_training/cnn/checkpoints/symbols_cnn_best.pt"/>
+  <arg name="device" default="auto"/>
+  <arg name="max_rate" default="5.0"/>
+  <arg name="min_confidence" default="0.0"/>
+  <arg name="publish_annotated" default="true"/>
+
+  <group if="$(arg bringup)">
+    <include file="$(find stingray_camera)/launch/triton.launch">
+      <arg name="drive" value="$(arg drive)"/>
+      <arg name="camera" value="$(arg camera)"/>
+      <arg name="lidar" value="$(arg lidar)"/>
+    </include>
+  </group>
+
+  <node pkg="symbols_recognition" type="symbol_classifier.py" name="symbol_classifier" output="screen" if="$(arg detector)">
+    <param name="image_topic" value="$(arg image_topic)"/>
+    <param name="checkpoint_path" value="$(arg checkpoint_path)"/>
+    <param name="model_type" value="$(arg model_type)"/>
+    <param name="device" value="$(arg device)"/>
+    <param name="max_rate" value="$(arg max_rate)"/>
+    <param name="min_confidence" value="$(arg min_confidence)"/>
+    <param name="publish_annotated" value="$(arg publish_annotated)"/>
+  </node>
+
+  <node pkg="symbols_recognition" type="real_wall_follower.py" name="real_wall_follower" output="screen" if="$(arg wall_follow)">
+    <param name="scan_topic" value="$(arg scan_topic)"/>
+    <param name="cmd_vel_topic" value="$(arg cmd_vel_topic)"/>
+  </node>
+</launch>
+

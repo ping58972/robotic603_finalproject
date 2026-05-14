@@ -27,15 +27,21 @@ RUN apt-get install -y \
   ros-noetic-usb-cam \
   ros-noetic-rplidar-ros \
   ros-noetic-camera-info-manager \
+  ros-noetic-cv-bridge \
   ros-noetic-image-transport \
   ros-noetic-image-transport-plugins \
+  ros-noetic-vision-opencv \
   tmux \
   python3-pip \
   python3-numpy \
   python3-opencv \
+  python3-pil \
   ros-noetic-teleop-twist-keyboard
 
-RUN python3 -m pip install torch torchvision
+RUN python3 -m pip install --no-cache-dir \
+  --index-url https://download.pytorch.org/whl/cpu \
+  torch==2.4.1+cpu \
+  torchvision==0.19.1+cpu
 
 RUN echo "source /opt/ros/noetic/setup.bash" >> /root/.bashrc
 
