@@ -4,8 +4,10 @@
   <arg name="camera" default="true"/>
   <arg name="lidar" default="true"/>
   <arg name="detector" default="true"/>
+  <arg name="target_seek" default="true"/>
   <arg name="wall_follow" default="false"/>
 
+  <arg name="target_symbol" default="prompt"/>
   <arg name="image_topic" default="/camera/color/image_raw"/>
   <arg name="scan_topic" default="/scan"/>
   <arg name="cmd_vel_topic" default="/cmd_vel"/>
@@ -15,6 +17,13 @@
   <arg name="max_rate" default="5.0"/>
   <arg name="min_confidence" default="0.0"/>
   <arg name="publish_annotated" default="true"/>
+  <arg name="localize_symbol" default="true"/>
+
+  <arg name="target_min_confidence" default="0.75"/>
+  <arg name="require_bbox" default="true"/>
+  <arg name="stop_distance" default="0.65"/>
+  <arg name="approach_speed" default="0.16"/>
+  <arg name="search_angular_speed" default="0.32"/>
 
   <group if="$(arg bringup)">
     <include file="$(find stingray_camera)/launch/triton.launch">
@@ -32,6 +41,19 @@
     <param name="max_rate" value="$(arg max_rate)"/>
     <param name="min_confidence" value="$(arg min_confidence)"/>
     <param name="publish_annotated" value="$(arg publish_annotated)"/>
+    <param name="localize_symbol" value="$(arg localize_symbol)"/>
+  </node>
+
+  <node pkg="symbols_recognition" type="target_symbol_controller.py" name="target_symbol_controller" output="screen" if="$(arg target_seek)">
+    <param name="target_symbol" value="$(arg target_symbol)"/>
+    <param name="result_topic" value="/symbol_classifier/result"/>
+    <param name="scan_topic" value="$(arg scan_topic)"/>
+    <param name="cmd_vel_topic" value="$(arg cmd_vel_topic)"/>
+    <param name="min_confidence" value="$(arg target_min_confidence)"/>
+    <param name="require_bbox" value="$(arg require_bbox)"/>
+    <param name="stop_distance" value="$(arg stop_distance)"/>
+    <param name="approach_speed" value="$(arg approach_speed)"/>
+    <param name="search_angular_speed" value="$(arg search_angular_speed)"/>
   </node>
 
   <node pkg="symbols_recognition" type="real_wall_follower.py" name="real_wall_follower" output="screen" if="$(arg wall_follow)">
@@ -39,4 +61,3 @@
     <param name="cmd_vel_topic" value="$(arg cmd_vel_topic)"/>
   </node>
 </launch>
-

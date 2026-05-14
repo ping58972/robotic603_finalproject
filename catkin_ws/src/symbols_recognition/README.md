@@ -12,6 +12,18 @@ ROS_IP=<robot-or-host-ip> docker compose up -d
 docker compose exec triton_noetic_ping /setup.bash
 ```
 
+`/setup.bash` prompts for the target symbol:
+
+```text
+Target symbol [star, square, circle, triangle]:
+```
+
+You can also pass it directly:
+
+```bash
+docker compose exec triton_noetic_ping /setup.bash target_symbol:=star
+```
+
 `docker-compose.yaml` mounts `./nn_training` at `/nn_training` so trained checkpoints are available to the ROS node.
 
 To open a shell instead:
@@ -31,7 +43,27 @@ The real robot entrypoint is:
 roslaunch symbols_recognition real_robot.launch
 ```
 
-It starts the Triton hardware bringup from `stingray_camera`, subscribes to the RealSense color image, loads a trained PyTorch checkpoint, and publishes symbol predictions.
+It starts the Triton hardware bringup from `stingray_camera`, subscribes to the RealSense color image, loads a trained PyTorch checkpoint, publishes symbol predictions, and starts the target-seeking controller.
+
+The target-seeking behavior is:
+
+1. Read a target symbol: `star`, `square`, `circle`, or `triangle`.
+2. Rotate in place until the classifier sees the target symbol.
+3. Align the target toward the camera center.
+4. Drive forward while the target stays visible.
+5. Stop when the front LiDAR range is within `stop_distance`.
+
+Direct launch with a target symbol:
+
+```bash
+roslaunch symbols_recognition real_robot.launch target_symbol:=square
+```
+
+Disable target seeking and only publish classifier results:
+
+```bash
+roslaunch symbols_recognition real_robot.launch target_seek:=false
+```
 
 Default topics:
 
@@ -40,6 +72,7 @@ Default topics:
 - confidence: `/symbol_classifier/confidence`
 - full JSON result: `/symbol_classifier/result`
 - annotated image: `/symbol_classifier/annotated_image`
+- robot velocity command: `/cmd_vel`
 
 Default checkpoint inside Docker:
 
@@ -64,5 +97,17 @@ roslaunch symbols_recognition real_robot.launch bringup:=false
 Enable the optional real-robot LiDAR wall follower:
 
 ```bash
-roslaunch symbols_recognition real_robot.launch wall_follow:=true
+roslaunch symbols_recognition real_robot.launch target_seek:=false wall_follow:=true
+```
+
+Useful target-seeking tuning args:
+
+```bash
+roslaunch symbols_recognition real_robot.launch \
+  target_symbol:=circle \
+  target_min_confidence:=0.80 \
+  require_bbox:=true \
+  stop_distance:=0.60 \
+  approach_speed:=0.14 \
+  search_angular_speed:=0.30
 ```

@@ -39,6 +39,7 @@ install(PROGRAMS
   scripts/position_publisher.py
   scripts/real_wall_follower.py
   scripts/symbol_classifier.py
+  scripts/target_symbol_controller.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
