@@ -135,7 +135,7 @@ roslaunch symbols_recognition real_robot.launch \
   target_symbol:=circle \
   use_usb_cam:=true \
   usb_video_device:=/dev/video2 \
-  usb_pixel_format:=mjpeg \
+  usb_pixel_format:=yuyv \
   color_width:=640 \
   color_height:=480 \
   color_fps:=15
@@ -145,10 +145,10 @@ If the web stream is green, purple, or warped, `usb_cam` is probably reading a d
 
 ```bash
 v4l2-ctl --list-devices
-v4l2-ctl --list-formats-ext -d /dev/video0
+v4l2-ctl --list-formats-ext -d /dev/video2
 ```
 
-On RealSense cameras the color stream is commonly `/dev/video2`, but the exact index can change. Try `usb_pixel_format:=mjpeg` first, then `usb_pixel_format:=yuyv` or `usb_pixel_format:=uyvy` if MJPEG is not listed for the selected device.
+On RealSense cameras the color stream is commonly `/dev/video2`, but the exact index can change. Use `usb_pixel_format:=yuyv` when `YUYV 4:2:2` is listed. Use `usb_pixel_format:=uyvy` for `UYVY`, or `usb_pixel_format:=mjpeg` only when `Motion-JPEG` is listed for that exact video device.
 
 If another workflow needs the RealSense ROS driver, disable the fallback explicitly:
 
