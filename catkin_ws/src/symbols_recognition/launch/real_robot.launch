@@ -12,6 +12,7 @@
   <arg name="color_fps" default="15"/>
   <arg name="detector" default="true"/>
   <arg name="detector_respawn" default="true"/>
+  <arg name="web_video_server" default="true"/>
   <arg name="target_seek" default="true"/>
   <arg name="wall_follow" default="false"/>
 
@@ -50,6 +51,8 @@
       <arg name="color_fps" value="$(arg color_fps)"/>
     </include>
   </group>
+
+  <node pkg="web_video_server" type="web_video_server" name="web_video_server" output="screen" if="$(arg web_video_server)" respawn="true" respawn_delay="3.0"/>
 
   <node pkg="symbols_recognition" type="symbol_classifier.py" name="symbol_classifier" output="screen" if="$(arg detector)" respawn="$(arg detector_respawn)" respawn_delay="3.0">
     <env name="LD_PRELOAD" value="$(arg libgomp_preload)"/>

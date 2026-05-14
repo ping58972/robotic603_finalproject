@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
 ARG DEBIAN_FRONTEND=noninteractive
+ENV ROS_DISTRO=noetic
 
 RUN apt-get update && apt-get install -y curl gnupg2 lsb-release
 
@@ -33,6 +34,7 @@ RUN apt-get install -y \
   ros-noetic-image-transport \
   ros-noetic-image-transport-plugins \
   ros-noetic-vision-opencv \
+  ros-${ROS_DISTRO}-web-video-server \
   tmux \
   python3-pip \
   python3-numpy \

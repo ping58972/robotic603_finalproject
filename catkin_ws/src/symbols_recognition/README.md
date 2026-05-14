@@ -44,6 +44,7 @@ roslaunch symbols_recognition real_robot.launch
 ```
 
 It starts the Triton hardware bringup from `stingray_camera`, subscribes to the RealSense color image, loads a trained PyTorch checkpoint, publishes symbol predictions, and starts the target-seeking controller.
+It also starts `web_video_server` by default so camera topics are available over HTTP on the server's default port. Disable it with `web_video_server:=false`.
 
 The target-seeking behavior is:
 
