@@ -107,7 +107,11 @@ roslaunch symbols_recognition real_robot.launch \
   target_symbol:=circle \
   target_min_confidence:=0.80 \
   require_bbox:=true \
+  require_classifier_ready:=true \
+  classifier_timeout:=2.0 \
   stop_distance:=0.60 \
   approach_speed:=0.14 \
   search_angular_speed:=0.30
 ```
+
+If RealSense prints messages such as `set_xu(ctrl=1) failed` or `requested device is NOT found`, the camera driver is not producing images. With `require_classifier_ready:=true`, the robot holds zero velocity until `/symbol_classifier/result` is live again. Check USB connection, camera permissions, and that another process is not already using the RealSense device.

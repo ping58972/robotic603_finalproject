@@ -73,9 +73,12 @@ class TargetSymbolController:
         self.center_deadband = float(rospy.get_param("~center_deadband", 0.06))
         self.enable_motion = self.ros_bool(rospy.get_param("~enable_motion", True))
         self.require_bbox = self.ros_bool(rospy.get_param("~require_bbox", True))
+        self.require_classifier_ready = self.ros_bool(rospy.get_param("~require_classifier_ready", True))
+        self.classifier_timeout = float(rospy.get_param("~classifier_timeout", 2.0))
 
         self.front_distance = float("inf")
         self.last_target_detection = None
+        self.last_classifier_result_time = None
         self.stopped = False
 
         self.cmd_pub = rospy.Publisher(self.cmd_vel_topic, Twist, queue_size=10)
@@ -133,6 +136,7 @@ class TargetSymbolController:
         except ValueError:
             rospy.logwarn_throttle(2.0, "Ignoring malformed classifier result: %s", msg.data)
             return
+        self.last_classifier_result_time = rospy.Time.now()
 
         try:
             raw_label = normalize_symbol(result.get("raw_label", result.get("label", "")))
@@ -158,9 +162,25 @@ class TargetSymbolController:
             return False
         return (rospy.Time.now() - self.last_target_detection["time"]).to_sec() <= self.detection_timeout
 
+    def classifier_is_ready(self):
+        if not self.require_classifier_ready:
+            return True
+        if self.last_classifier_result_time is None:
+            return False
+        return (rospy.Time.now() - self.last_classifier_result_time).to_sec() <= self.classifier_timeout
+
     def control_loop(self, _event):
         if self.stopped:
             self.stop_robot()
+            return
+
+        if not self.classifier_is_ready():
+            self.stop_robot()
+            rospy.logwarn_throttle(
+                2.0,
+                "Waiting for camera/classifier results on %s before moving.",
+                self.result_topic,
+            )
             return
 
         if math.isfinite(self.front_distance) and self.front_distance <= self.stop_distance and self.target_is_recent():

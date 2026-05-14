@@ -21,6 +21,8 @@
 
   <arg name="target_min_confidence" default="0.75"/>
   <arg name="require_bbox" default="true"/>
+  <arg name="require_classifier_ready" default="true"/>
+  <arg name="classifier_timeout" default="2.0"/>
   <arg name="stop_distance" default="0.65"/>
   <arg name="approach_speed" default="0.16"/>
   <arg name="search_angular_speed" default="0.32"/>
@@ -51,6 +53,8 @@
     <param name="cmd_vel_topic" value="$(arg cmd_vel_topic)"/>
     <param name="min_confidence" value="$(arg target_min_confidence)"/>
     <param name="require_bbox" value="$(arg require_bbox)"/>
+    <param name="require_classifier_ready" value="$(arg require_classifier_ready)"/>
+    <param name="classifier_timeout" value="$(arg classifier_timeout)"/>
     <param name="stop_distance" value="$(arg stop_distance)"/>
     <param name="approach_speed" value="$(arg approach_speed)"/>
     <param name="search_angular_speed" value="$(arg search_angular_speed)"/>
