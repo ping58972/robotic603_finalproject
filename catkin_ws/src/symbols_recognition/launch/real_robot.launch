@@ -3,6 +3,9 @@
   <arg name="drive" default="true"/>
   <arg name="camera" default="true"/>
   <arg name="lidar" default="true"/>
+  <arg name="use_usb_cam" default="true"/>
+  <arg name="usb_video_device" default="/dev/video2"/>
+  <arg name="usb_pixel_format" default="yuyv"/>
   <arg name="aligned_depth" default="false"/>
   <arg name="color_width" default="640"/>
   <arg name="color_height" default="480"/>
@@ -38,6 +41,9 @@
       <arg name="drive" value="$(arg drive)"/>
       <arg name="camera" value="$(arg camera)"/>
       <arg name="lidar" value="$(arg lidar)"/>
+      <arg name="use_usb_cam" value="$(arg use_usb_cam)"/>
+      <arg name="usb_video_device" value="$(arg usb_video_device)"/>
+      <arg name="usb_pixel_format" value="$(arg usb_pixel_format)"/>
       <arg name="aligned_depth" value="$(arg aligned_depth)"/>
       <arg name="color_width" value="$(arg color_width)"/>
       <arg name="color_height" value="$(arg color_height)"/>

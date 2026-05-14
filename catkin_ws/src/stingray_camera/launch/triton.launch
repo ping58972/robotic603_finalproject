@@ -2,6 +2,9 @@
   <arg name="drive" default="true"/>
   <arg name="camera" default="true"/>
   <arg name="lidar" default="true"/>
+  <arg name="use_usb_cam" default="false"/>
+  <arg name="usb_video_device" default="/dev/video0"/>
+  <arg name="usb_pixel_format" default="yuyv"/>
   <arg name="aligned_depth" default="false"/>
   <arg name="color_width" default="640"/>
   <arg name="color_height" default="480"/>
@@ -23,29 +26,43 @@
   <node pkg="tf" type="static_transform_publisher" name="base_scan_to_laser" args="0 0 0 0 0 0 /base_scan /laser 100"/>
   
   <group if="$(arg camera)">
-    <group unless="$(arg aligned_depth)">
-      <include file="$(find realsense2_camera)/launch/rs_camera.launch">
-        <arg name="enable_color" value="true"/>
-        <arg name="color_width" value="$(arg color_width)"/>
-        <arg name="color_height" value="$(arg color_height)"/>
-        <arg name="color_fps" value="$(arg color_fps)"/>
-        <arg name="enable_depth" value="false"/>
-        <arg name="enable_infra1" value="false"/>
-        <arg name="enable_infra2" value="false"/>
-        <arg name="enable_pointcloud" value="false"/>
-        <arg name="align_depth" value="false"/>
-        <arg name="initial_reset" value="true"/>
-        <arg name="reconnect_timeout" value="6.0"/>
-        <arg name="wait_for_device_timeout" value="-1.0"/>
-      </include>
+    <group if="$(arg use_usb_cam)">
+      <node pkg="usb_cam" type="usb_cam_node" name="usb_cam" ns="/camera/color" output="screen">
+        <param name="video_device" value="$(arg usb_video_device)"/>
+        <param name="image_width" value="$(arg color_width)"/>
+        <param name="image_height" value="$(arg color_height)"/>
+        <param name="framerate" value="$(arg color_fps)"/>
+        <param name="pixel_format" value="$(arg usb_pixel_format)"/>
+        <param name="camera_frame_id" value="camera_color_optical_frame"/>
+        <param name="io_method" value="mmap"/>
+      </node>
     </group>
 
-    <group if="$(arg aligned_depth)">
-      <include file="$(find realsense2_camera)/launch/rs_aligned_depth.launch">
-        <arg name="initial_reset" value="true"/>
-        <arg name="reconnect_timeout" value="6.0"/>
-        <arg name="wait_for_device_timeout" value="-1.0"/>
-      </include>
+    <group unless="$(arg use_usb_cam)">
+      <group unless="$(arg aligned_depth)">
+        <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+          <arg name="enable_color" value="true"/>
+          <arg name="color_width" value="$(arg color_width)"/>
+          <arg name="color_height" value="$(arg color_height)"/>
+          <arg name="color_fps" value="$(arg color_fps)"/>
+          <arg name="enable_depth" value="false"/>
+          <arg name="enable_infra1" value="false"/>
+          <arg name="enable_infra2" value="false"/>
+          <arg name="enable_pointcloud" value="false"/>
+          <arg name="align_depth" value="false"/>
+          <arg name="initial_reset" value="true"/>
+          <arg name="reconnect_timeout" value="6.0"/>
+          <arg name="wait_for_device_timeout" value="-1.0"/>
+        </include>
+      </group>
+
+      <group if="$(arg aligned_depth)">
+        <include file="$(find realsense2_camera)/launch/rs_aligned_depth.launch">
+          <arg name="initial_reset" value="true"/>
+          <arg name="reconnect_timeout" value="6.0"/>
+          <arg name="wait_for_device_timeout" value="-1.0"/>
+        </include>
+      </group>
     </group>
   </group>
 

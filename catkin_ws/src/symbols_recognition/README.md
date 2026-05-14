@@ -127,19 +127,27 @@ rosrun symbols_recognition symbol_classifier.py _checkpoint_path:=/nn_training/c
 
 The classifier can be launched without a live image topic; it should stay alive and wait for images. If it exits, the terminal error from `rosrun` is the real cause.
 
-The Triton bringup starts the RealSense in color-only mode by default for symbol detection:
+The symbol-recognition launch starts the camera through `usb_cam` by default because this task only needs RGB images and the RealSense driver can fail on some robot USB setups with `failed to set power state`.
 
 ```bash
 roslaunch symbols_recognition real_robot.launch \
   target_symbol:=circle \
-  aligned_depth:=false \
+  use_usb_cam:=true \
+  usb_video_device:=/dev/video2 \
   color_width:=640 \
   color_height:=480 \
   color_fps:=15
 ```
 
-This avoids the extra aligned-depth streams and USB control calls that are not needed for the symbol task. If another workflow needs aligned depth, enable it explicitly:
+If `/dev/video2` is not the RGB stream, inspect the devices and try `/dev/video0` or `/dev/video1`:
 
 ```bash
-roslaunch symbols_recognition real_robot.launch aligned_depth:=true
+v4l2-ctl --list-devices
+v4l2-ctl --list-formats-ext -d /dev/video2
+```
+
+If another workflow needs the RealSense ROS driver, disable the fallback explicitly:
+
+```bash
+roslaunch symbols_recognition real_robot.launch use_usb_cam:=false aligned_depth:=true
 ```
