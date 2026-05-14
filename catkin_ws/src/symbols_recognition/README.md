@@ -115,3 +115,20 @@ roslaunch symbols_recognition real_robot.launch \
 ```
 
 If RealSense prints messages such as `set_xu(ctrl=1) failed` or `requested device is NOT found`, the camera driver is not producing images. With `require_classifier_ready:=true`, the robot holds zero velocity until `/symbol_classifier/result` is live again. Check USB connection, camera permissions, and that another process is not already using the RealSense device.
+
+The Triton bringup starts the RealSense in color-only mode by default for symbol detection:
+
+```bash
+roslaunch symbols_recognition real_robot.launch \
+  target_symbol:=circle \
+  aligned_depth:=false \
+  color_width:=640 \
+  color_height:=480 \
+  color_fps:=15
+```
+
+This avoids the extra aligned-depth streams and USB control calls that are not needed for the symbol task. If another workflow needs aligned depth, enable it explicitly:
+
+```bash
+roslaunch symbols_recognition real_robot.launch aligned_depth:=true
+```
