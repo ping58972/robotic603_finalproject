@@ -1,0 +1,69 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {I-A}Task and Research Questions}{1}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {I-B}Overview of Results}{1}{subsection.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {II}Original Design and Planned Pipeline}{2}{section.2}\protected@file@percent }
+\newlabel{sec:original-design}{{II}{2}{Original Design and Planned Pipeline}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {II-A}Proposed System Architecture}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {II-B}Planned ROS Graph}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Implementation}{2}{section.3}\protected@file@percent }
+\newlabel{sec:implementation}{{III}{2}{Implementation}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-A}Code and Launch Organization}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Main ROS nodes and their role in the final project.}}{2}{table.1}\protected@file@percent }
+\newlabel{tab:nodes}{{I}{2}{Main ROS nodes and their role in the final project}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-B}Gazebo Simulation and Q-Learning}{2}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Representative Q-learning training curves over 500 episodes, generated from the trainer hyperparameters ($\alpha $=0.1, $\gamma $=0.95, $\varepsilon $-decay=0.995, max-steps=300). \emph  {Top:} episode total reward (light) and 20-episode rolling mean (dark); reward increases as the policy improves. \emph  {Bottom left:} steps per episode. \emph  {Bottom right:} $\varepsilon $ decays from 1.0 to the minimum of 0.05 by episode~$\approx $500. Per-episode logs were not saved to disk; this curve is illustrative of the training dynamics under these hyperparameters.}}{3}{figure.1}\protected@file@percent }
+\newlabel{fig:qlearning}{{1}{3}{Representative Q-learning training curves over 500 episodes, generated from the trainer hyperparameters ($\alpha $=0.1, $\gamma $=0.95, $\varepsilon $-decay=0.995, max-steps=300). \emph {Top:} episode total reward (light) and 20-episode rolling mean (dark); reward increases as the policy improves. \emph {Bottom left:} steps per episode. \emph {Bottom right:} $\varepsilon $ decays from 1.0 to the minimum of 0.05 by episode~$\approx $500. Per-episode logs were not saved to disk; this curve is illustrative of the training dynamics under these hyperparameters}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-C}OpenCV Symbol Detector}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-D}RGB-D Localizer and Symbol Map}{3}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-E}Neural Network Symbol Recognition}{3}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-F}Navigation Controller and Command Interface}{3}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-G}Robot Bringup and Hardware Integration}{3}{subsection.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Hardware Limitations and Engineering Adaptations}{3}{section.4}\protected@file@percent }
+\newlabel{sec:adaptations}{{IV}{3}{Hardware Limitations and Engineering Adaptations}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Q-Learning Sim-to-Real Transfer Failure}{3}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}RealSense USB~2.0 Bandwidth Limitation}{4}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-C}Environment Change}{4}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Final USB2-compatible demo architecture. Hardware sources (gray) feed ROS topics (orange) consumed by three nodes (blue). The stop monitor latches \texttt  {/exploration\_enabled=false} (dashed) to halt the explorer after repeated high-confidence detections.}}{4}{figure.2}\protected@file@percent }
+\newlabel{fig:arch}{{2}{4}{Final USB2-compatible demo architecture. Hardware sources (gray) feed ROS topics (orange) consumed by three nodes (blue). The stop monitor latches \texttt {/exploration\_enabled=false} (dashed) to halt the explorer after repeated high-confidence detections}{figure.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Final System: USB2-Compatible Demo}{4}{section.5}\protected@file@percent }
+\newlabel{sec:final-system}{{V}{4}{Final System: USB2-Compatible Demo}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-A}Architecture}{4}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {V-B}Target Stop Monitor}{4}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Experiments}{4}{section.6}\protected@file@percent }
+\newlabel{sec:experiments}{{VI}{4}{Experiments}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {VI-A}Experimental Setup}{4}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {VI-B}False Positive Debugging}{5}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {VI-C}Final Triangle Search Result}{5}{subsection.6.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Final target-monitor parameters.}}{5}{table.2}\protected@file@percent }
+\newlabel{tab:params}{{II}{5}{Final target-monitor parameters}{table.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Final real-robot demo result.}}{5}{table.3}\protected@file@percent }
+\newlabel{tab:result}{{III}{5}{Final real-robot demo result}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {VI-D}Discussion: What the Demo Proves and What It Does Not}{5}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {VI-E}Limitations}{5}{subsection.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Additional Experiment}{5}{section.7}\protected@file@percent }
+\newlabel{sec:additional-experiment}{{VII}{5}{Additional Experiment}{section.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Additional experiment workflow: camera-based data collection, neural-network training, ROS inference, and planned use of depth and navigation for symbol-directed robot behavior.}}{6}{figure.3}\protected@file@percent }
+\newlabel{fig:add-workflow}{{3}{6}{Additional experiment workflow: camera-based data collection, neural-network training, ROS inference, and planned use of depth and navigation for symbol-directed robot behavior}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Representative training images used for the neural-network symbol-recognition experiment.}}{6}{figure.4}\protected@file@percent }
+\newlabel{fig:add-dataset}{{4}{6}{Representative training images used for the neural-network symbol-recognition experiment}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {VII-A}Experimental Setup}{6}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {VII-B}Software and Hardware Debugging}{6}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {VII-C}Search and Recognition Symbols}{6}{subsection.7.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Saved CNN training summary, including train/validation accuracy, loss, learning rate, dataset counts, final metrics, and confusion matrix.}}{7}{figure.5}\protected@file@percent }
+\newlabel{fig:add-cnn-results}{{5}{7}{Saved CNN training summary, including train/validation accuracy, loss, learning rate, dataset counts, final metrics, and confusion matrix}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Saved MobileNetV2 training summary for the same four-symbol dataset.}}{7}{figure.6}\protected@file@percent }
+\newlabel{fig:add-mobilenet-results}{{6}{7}{Saved MobileNetV2 training summary for the same four-symbol dataset}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {VII-D}Discussion}{7}{subsection.7.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Additional neural-network dataset and test results.}}{7}{table.4}\protected@file@percent }
+\newlabel{tab:add-nn-results}{{IV}{7}{Additional neural-network dataset and test results}{table.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {VII-E}Limitations}{7}{subsection.7.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion}{8}{section.8}\protected@file@percent }
+\newlabel{sec:conclusion}{{VIII}{8}{Conclusion}{section.8}{}}
+\@writefile{toc}{\contentsline {section}{Appendix}{8}{section*.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Full-project workload distribution.}}{8}{table.5}\protected@file@percent }
+\newlabel{tab:workload}{{V}{8}{Full-project workload distribution}{table.5}{}}
+\gdef \@abspage@last{8}

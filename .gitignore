@@ -5,6 +5,7 @@ __pycache__/
 .DS_Store
 # C extensions
 *.so
+# report-paper/
 # nn_training/*
 # !nn_training/__init__.py
 # !nn_training/cnn/
